@@ -1,0 +1,20 @@
+load("@rules_pkg//experimental:pkg_filegroup.bzl", "pkg_filegroup")
+load("@rules_pkg//experimental:rpm.bzl", "pkg_rpm")
+
+pkg_filegroup(
+    name = "foo",
+    srcs = ["foo.txt"],
+    prefix = "/bar",
+)
+
+pkg_rpm(
+    name = "foo_pkg",
+    rpm_name = "foo",
+    version = "1.1.1",
+    release = "2",
+    arch = "noarch",
+    summary = "foo summary",
+    data = [":foo"],
+    license = "Internal",
+    description = """foo description""",
+)
